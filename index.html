@@ -1,126 +1,149 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Video Factory V16 - Online Panel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video Factory V18</title>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-    body{background:#0b1020;color:white;min-height:100vh;padding:28px}
-    .container{max-width:1100px;margin:auto}
-    .card{background:#151c33;border-radius:20px;padding:24px;margin-bottom:18px;box-shadow:0 0 20px rgba(0,0,0,.35);border:1px solid #263456}
-    h1{font-size:36px;color:#5eff8d;margin-bottom:8px}
-    h2{color:#7ab8ff;margin-bottom:14px}
-    h3{color:#ffd35e;margin:14px 0 8px}
-    p,li{line-height:1.7}
+    *{box-sizing:border-box}
+    body{margin:0;background:#071022;color:white;font-family:Arial,sans-serif;min-height:100vh;padding:24px}
+    .wrap{max-width:1180px;margin:auto}
+    .top,.card{background:#121c36;border:1px solid #2b3d67;border-radius:22px;padding:24px;margin-bottom:18px}
+    h1{margin:0;color:#66aaff;font-size:34px}
+    h2{color:#66aaff;margin-top:0}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    label{display:block;margin:14px 0 7px;font-size:14px;color:#dce7ff}
-    input,textarea,select{width:100%;padding:14px;border-radius:10px;border:1px solid #334366;background:#202944;color:white;font-size:15px}
-    textarea{min-height:130px;resize:vertical}
-    button,.btn{display:inline-block;margin-top:14px;padding:14px 20px;border:none;border-radius:12px;background:#5eff8d;color:#061018;font-size:15px;font-weight:bold;cursor:pointer;text-decoration:none}
-    .btn2{background:#7ab8ff}
-    .status{margin-top:14px;padding:14px;background:#101728;border-radius:12px;line-height:1.8;border:1px solid #263456}
-    .green{color:#5eff8d}.yellow{color:#ffd35e}.red{color:#ff7070}
-    .mono{font-family:Consolas,monospace;word-break:break-all;background:#0b1020;padding:10px;border-radius:10px;display:block;margin-top:6px}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:28px}body{padding:14px}}
+    label{display:block;margin-top:14px;margin-bottom:7px}
+    input,textarea,select{width:100%;padding:14px;border-radius:12px;border:1px solid #385079;background:#202b49;color:white;font-size:15px}
+    textarea{min-height:130px}
+    button{border:0;border-radius:12px;padding:15px 22px;margin-top:18px;font-weight:bold;cursor:pointer;background:#55ff88;color:#061018;font-size:16px}
+    .blue{background:#6bb6ff}
+    .status{margin-top:18px;background:#0c152a;border:1px solid #26385f;border-radius:15px;padding:16px;line-height:1.7}
+    .ok{color:#55ff88}.err{color:#ff6666}.warn{color:#ffd166}
+    code{display:block;background:#050b16;padding:10px;border-radius:10px;word-break:break-all;margin:8px 0}
+    pre{white-space:pre-wrap;word-break:break-word;background:#050b16;padding:12px;border-radius:10px}
+    @media(max-width:850px){.grid{grid-template-columns:1fr}body{padding:12px}}
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="card">
-    <h1>AI VIDEO FACTORY V16</h1>
-    <p>Online Form Paneli — GitHub + Render bağlantısı hazır.</p>
+<div class="wrap">
+  <div class="top">
+    <h1>🚀 AI VIDEO FACTORY V18</h1>
+    <p>Form → n8n Webhook → Render API bağlantılı test paneli</p>
     <div class="status">
-      <div><b>Canlı site:</b><span class="mono">https://youtube-gelisimotomasyon.onrender.com</span></div>
-      <div><b>GitHub repo:</b><span class="mono">hasandemir64-star / youtube_gelisimotomasyon</span></div>
-      <div><b>Branch:</b><span class="mono">main</span></div>
-      <div><b>Render servis adı:</b><span class="mono">youtube_gelisimotomasyon</span></div>
-      <div><b>Yayın klasörü:</b><span class="mono">.</span></div>
-      <div><b>Durum:</b> <span class="green">Canlı</span></div>
+      <b>Canlı Panel:</b>
+      <code>https://yotube-gelisimotomasyon1.onrender.com</code>
+      <b>Render API:</b>
+      <code>https://ai-video-factory-api.onrender.com/render</code>
     </div>
-    <a class="btn" href="https://youtube-gelisimotomasyon.onrender.com" target="_blank">🌐 Canlı Siteyi Aç</a>
-    <button class="btn2" onclick="copyText('https://youtube-gelisimotomasyon.onrender.com')">📋 Site Linkini Kopyala</button>
   </div>
 
   <div class="grid">
     <div class="card">
       <h2>Video Ayarları</h2>
       <label>Video Başlığı</label>
-      <input type="text" id="title" placeholder="Örn: Yapay Zeka Dünyayı Nasıl Değiştiriyor?">
+      <input id="title" value="kediler">
+
       <label>Senaryo</label>
-      <textarea id="story" placeholder="Video senaryosunu buraya yaz..."></textarea>
+      <textarea id="story">hayvan şakaları</textarea>
+
       <label>Video Türü</label>
-      <select id="type"><option>Uzun Video</option><option>Shorts</option></select>
+      <select id="type">
+        <option>Shorts</option>
+        <option selected>Uzun Video</option>
+        <option>Instagram Reels</option>
+      </select>
+
       <label>Sahne Sayısı</label>
-      <input type="number" id="scene" value="5">
-      <button onclick="startRender()">🎬 Video Üret</button>
+      <input id="scene" type="number" value="5">
+
+      <button onclick="startN8n()">🎬 Video Üret</button>
     </div>
 
     <div class="card">
       <h2>Render / n8n Ayarları</h2>
-      <label>Form Panel URL</label>
-      <input type="text" id="panelUrl" value="https://youtube-gelisimotomasyon.onrender.com">
-      <label>Render API URL</label>
-      <input type="text" id="api" value="https://SENIN-RENDER-API-SERVISIN.onrender.com/render">
       <label>n8n Webhook URL</label>
-      <input type="text" id="n8n" placeholder="https://.../webhook/...">
-      <label>Gemini API Key</label>
-      <input type="password" id="gemini" placeholder="Gemini API Key">
-      <label>YouTube API / OAuth Bilgisi</label>
-      <input type="password" id="youtube" placeholder="YouTube API veya OAuth bilgisi">
-      <label>WhatsApp Webhook</label>
-      <input type="text" id="whatsapp" placeholder="WhatsApp bildirim webhook URL">
+      <input id="n8n" value="https://gelisimotomasyon.app.n8n.cloud/webhook/ai-video-factory-v18">
+
+      <label>Render API URL</label>
+      <input id="api" value="https://ai-video-factory-api.onrender.com/render">
+
       <button onclick="saveSettings()">💾 Ayarları Kaydet</button>
-      <button class="btn2" onclick="copyRenderUrl()">📋 /render URL Kopyala</button>
+      <button class="blue" onclick="testApi()">🔍 Render API Test Et</button>
+
       <div class="status" id="saveStatus">Sistem hazır.</div>
     </div>
   </div>
 
   <div class="card">
     <h2>Sistem Durumu</h2>
-    <div class="status" id="renderStatus">
-      <div>🟢 Form sitesi Render üzerinde canlı.</div>
-      <div>🟡 Sıradaki işlem: Render API server adresini bu forma eklemek.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Şu An Ne Yapacaksın?</h2>
-    <h3>1. Bu güncel HTML dosyasını GitHub’a yükle</h3>
-    <p>GitHub’da eski <b>AI_VIDEO_FACTORY_V16_WORKING_FORM.html</b> dosyasını bununla değiştir.</p>
-    <h3>2. Render otomatik güncelleyecek</h3>
-    <p>GitHub’a yükleyince Render otomatik deploy yapar. 1-2 dakika sonra canlı site değişir.</p>
-    <h3>3. Sonra gerçek video API server kuracağız</h3>
-    <p>Bu site şu an form panelidir. Video üretiminin çalışması için ayrıca <b>/render API server</b> kurulacak.</p>
-    <div class="status">
-      <b>Form sitesi:</b><span class="mono">https://youtube-gelisimotomasyon.onrender.com</span>
-      <b>API adresi örneği:</b><span class="mono">https://ai-video-factory-api.onrender.com/render</span>
+    <div class="status" id="result">
+      <span class="warn">Bekliyor...</span>
     </div>
   </div>
 </div>
 
 <script>
 function saveSettings(){
-  ['panelUrl','api','n8n','gemini','youtube','whatsapp'].forEach(id=>localStorage.setItem(id,document.getElementById(id).value));
-  document.getElementById('saveStatus').innerHTML='<span class="green">✔ Ayarlar kaydedildi</span>';
+  ['n8n','api'].forEach(id=>{
+    localStorage.setItem(id, document.getElementById(id).value);
+  });
+  document.getElementById('saveStatus').innerHTML='<span class="ok">✔ Ayarlar kaydedildi</span>';
 }
-window.onload=()=>{['panelUrl','api','n8n','gemini','youtube','whatsapp'].forEach(id=>{const s=localStorage.getItem(id);if(s)document.getElementById(id).value=s;});}
-function copyText(t){navigator.clipboard.writeText(t);document.getElementById('saveStatus').innerHTML='<span class="green">✔ Kopyalandı</span>'}
-function copyRenderUrl(){copyText(document.getElementById('api').value)}
-async function startRender(){
-  const api=document.getElementById('api').value;
-  document.getElementById('renderStatus').innerHTML='<span class="yellow">⏳ Video üretimi başladı...</span>';
+
+window.onload=()=>{
+  ['n8n','api'].forEach(id=>{
+    const saved=localStorage.getItem(id);
+    if(saved) document.getElementById(id).value=saved;
+  });
+}
+
+async function startN8n(){
+  const webhook=document.getElementById('n8n').value.trim();
+  const payload={
+    title:document.getElementById('title').value,
+    story:document.getElementById('story').value,
+    type:document.getElementById('type').value,
+    scene_count:document.getElementById('scene').value,
+    render_api_url:document.getElementById('api').value
+  };
+
+  document.getElementById('result').innerHTML='<span class="warn">⏳ n8n webhook çağrılıyor...</span>';
+
   try{
-    const response=await fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      title:document.getElementById('title').value,
-      story:document.getElementById('story').value,
-      type:document.getElementById('type').value,
-      scene_count:document.getElementById('scene').value
-    })});
-    const data=await response.json();
-    document.getElementById('renderStatus').innerHTML=`<div class="green">✔ Render isteği başarılı</div><div><b>Status:</b> ${data.render_status||'success'}</div><div><b>Video:</b> ${data.final_video_url||'Hazır'}</div><div><b>Codec:</b> ${data.audio_codec||'aac'}</div>`;
+    const res=await fetch(webhook,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+
+    const text=await res.text();
+    let data;
+    try{data=JSON.parse(text)}catch(e){data={raw:text}}
+
+    document.getElementById('result').innerHTML=
+      '<span class="ok">✔ n8n bağlantısı başarılı</span><br><pre>'+JSON.stringify(data,null,2)+'</pre>';
   }catch(err){
-    document.getElementById('renderStatus').innerHTML=`<div class="red">❌ API bağlantı hatası</div><div>${err}</div><div class="yellow">/render API server henüz kurulmadıysa bu hata normaldir.</div>`;
+    document.getElementById('result').innerHTML=
+      '<span class="err">❌ n8n bağlantı hatası</span><br>'+err+
+      '<br><br><span class="warn">Not: n8n workflow Published/Active olmalı ve Production URL kullanılmalı.</span>';
+  }
+}
+
+async function testApi(){
+  const api=document.getElementById('api').value.trim();
+  document.getElementById('result').innerHTML='<span class="warn">⏳ Render API test ediliyor...</span>';
+
+  try{
+    const res=await fetch(api,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({title:'test',story:'test senaryosu',type:'Shorts',scene_count:5})
+    });
+    const data=await res.json();
+    document.getElementById('result').innerHTML=
+      '<span class="ok">✔ Render API çalışıyor</span><br><pre>'+JSON.stringify(data,null,2)+'</pre>';
+  }catch(err){
+    document.getElementById('result').innerHTML='<span class="err">❌ Render API hatası</span><br>'+err;
   }
 }
 </script>
