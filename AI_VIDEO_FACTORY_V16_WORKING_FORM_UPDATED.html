@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Video Factory V16 - Online Panel</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    body{background:#0b1020;color:white;min-height:100vh;padding:28px}
+    .container{max-width:1100px;margin:auto}
+    .card{background:#151c33;border-radius:20px;padding:24px;margin-bottom:18px;box-shadow:0 0 20px rgba(0,0,0,.35);border:1px solid #263456}
+    h1{font-size:36px;color:#5eff8d;margin-bottom:8px}
+    h2{color:#7ab8ff;margin-bottom:14px}
+    h3{color:#ffd35e;margin:14px 0 8px}
+    p,li{line-height:1.7}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    label{display:block;margin:14px 0 7px;font-size:14px;color:#dce7ff}
+    input,textarea,select{width:100%;padding:14px;border-radius:10px;border:1px solid #334366;background:#202944;color:white;font-size:15px}
+    textarea{min-height:130px;resize:vertical}
+    button,.btn{display:inline-block;margin-top:14px;padding:14px 20px;border:none;border-radius:12px;background:#5eff8d;color:#061018;font-size:15px;font-weight:bold;cursor:pointer;text-decoration:none}
+    .btn2{background:#7ab8ff}
+    .status{margin-top:14px;padding:14px;background:#101728;border-radius:12px;line-height:1.8;border:1px solid #263456}
+    .green{color:#5eff8d}.yellow{color:#ffd35e}.red{color:#ff7070}
+    .mono{font-family:Consolas,monospace;word-break:break-all;background:#0b1020;padding:10px;border-radius:10px;display:block;margin-top:6px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:28px}body{padding:14px}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>AI VIDEO FACTORY V16</h1>
+    <p>Online Form Paneli — GitHub + Render bağlantısı hazır.</p>
+    <div class="status">
+      <div><b>Canlı site:</b><span class="mono">https://youtube-gelisimotomasyon.onrender.com</span></div>
+      <div><b>GitHub repo:</b><span class="mono">hasandemir64-star / youtube_gelisimotomasyon</span></div>
+      <div><b>Branch:</b><span class="mono">main</span></div>
+      <div><b>Render servis adı:</b><span class="mono">youtube_gelisimotomasyon</span></div>
+      <div><b>Yayın klasörü:</b><span class="mono">.</span></div>
+      <div><b>Durum:</b> <span class="green">Canlı</span></div>
+    </div>
+    <a class="btn" href="https://youtube-gelisimotomasyon.onrender.com" target="_blank">🌐 Canlı Siteyi Aç</a>
+    <button class="btn2" onclick="copyText('https://youtube-gelisimotomasyon.onrender.com')">📋 Site Linkini Kopyala</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Video Ayarları</h2>
+      <label>Video Başlığı</label>
+      <input type="text" id="title" placeholder="Örn: Yapay Zeka Dünyayı Nasıl Değiştiriyor?">
+      <label>Senaryo</label>
+      <textarea id="story" placeholder="Video senaryosunu buraya yaz..."></textarea>
+      <label>Video Türü</label>
+      <select id="type"><option>Uzun Video</option><option>Shorts</option></select>
+      <label>Sahne Sayısı</label>
+      <input type="number" id="scene" value="5">
+      <button onclick="startRender()">🎬 Video Üret</button>
+    </div>
+
+    <div class="card">
+      <h2>Render / n8n Ayarları</h2>
+      <label>Form Panel URL</label>
+      <input type="text" id="panelUrl" value="https://youtube-gelisimotomasyon.onrender.com">
+      <label>Render API URL</label>
+      <input type="text" id="api" value="https://SENIN-RENDER-API-SERVISIN.onrender.com/render">
+      <label>n8n Webhook URL</label>
+      <input type="text" id="n8n" placeholder="https://.../webhook/...">
+      <label>Gemini API Key</label>
+      <input type="password" id="gemini" placeholder="Gemini API Key">
+      <label>YouTube API / OAuth Bilgisi</label>
+      <input type="password" id="youtube" placeholder="YouTube API veya OAuth bilgisi">
+      <label>WhatsApp Webhook</label>
+      <input type="text" id="whatsapp" placeholder="WhatsApp bildirim webhook URL">
+      <button onclick="saveSettings()">💾 Ayarları Kaydet</button>
+      <button class="btn2" onclick="copyRenderUrl()">📋 /render URL Kopyala</button>
+      <div class="status" id="saveStatus">Sistem hazır.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Sistem Durumu</h2>
+    <div class="status" id="renderStatus">
+      <div>🟢 Form sitesi Render üzerinde canlı.</div>
+      <div>🟡 Sıradaki işlem: Render API server adresini bu forma eklemek.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Şu An Ne Yapacaksın?</h2>
+    <h3>1. Bu güncel HTML dosyasını GitHub’a yükle</h3>
+    <p>GitHub’da eski <b>AI_VIDEO_FACTORY_V16_WORKING_FORM.html</b> dosyasını bununla değiştir.</p>
+    <h3>2. Render otomatik güncelleyecek</h3>
+    <p>GitHub’a yükleyince Render otomatik deploy yapar. 1-2 dakika sonra canlı site değişir.</p>
+    <h3>3. Sonra gerçek video API server kuracağız</h3>
+    <p>Bu site şu an form panelidir. Video üretiminin çalışması için ayrıca <b>/render API server</b> kurulacak.</p>
+    <div class="status">
+      <b>Form sitesi:</b><span class="mono">https://youtube-gelisimotomasyon.onrender.com</span>
+      <b>API adresi örneği:</b><span class="mono">https://ai-video-factory-api.onrender.com/render</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function saveSettings(){
+  ['panelUrl','api','n8n','gemini','youtube','whatsapp'].forEach(id=>localStorage.setItem(id,document.getElementById(id).value));
+  document.getElementById('saveStatus').innerHTML='<span class="green">✔ Ayarlar kaydedildi</span>';
+}
+window.onload=()=>{['panelUrl','api','n8n','gemini','youtube','whatsapp'].forEach(id=>{const s=localStorage.getItem(id);if(s)document.getElementById(id).value=s;});}
+function copyText(t){navigator.clipboard.writeText(t);document.getElementById('saveStatus').innerHTML='<span class="green">✔ Kopyalandı</span>'}
+function copyRenderUrl(){copyText(document.getElementById('api').value)}
+async function startRender(){
+  const api=document.getElementById('api').value;
+  document.getElementById('renderStatus').innerHTML='<span class="yellow">⏳ Video üretimi başladı...</span>';
+  try{
+    const response=await fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      title:document.getElementById('title').value,
+      story:document.getElementById('story').value,
+      type:document.getElementById('type').value,
+      scene_count:document.getElementById('scene').value
+    })});
+    const data=await response.json();
+    document.getElementById('renderStatus').innerHTML=`<div class="green">✔ Render isteği başarılı</div><div><b>Status:</b> ${data.render_status||'success'}</div><div><b>Video:</b> ${data.final_video_url||'Hazır'}</div><div><b>Codec:</b> ${data.audio_codec||'aac'}</div>`;
+  }catch(err){
+    document.getElementById('renderStatus').innerHTML=`<div class="red">❌ API bağlantı hatası</div><div>${err}</div><div class="yellow">/render API server henüz kurulmadıysa bu hata normaldir.</div>`;
+  }
+}
+</script>
+</body>
+</html>
